@@ -5,8 +5,8 @@
 </p>
 
 <p align="center">
-  <a href="https://www.lxhcool.cn">
-    <img src="https://img.shields.io/badge/lxhcool.cn-000000?style=flat-square&logo=google-chrome&logoColor=white" />
+  <a href="https://www.lxhcoool.cn">
+    <img src="https://img.shields.io/badge/lxhcoool.cn-000000?style=flat-square&logo=google-chrome&logoColor=white" />
   </a>
 </p>
 
