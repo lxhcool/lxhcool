@@ -21,7 +21,7 @@
 
 ### 🍇 妹妹说紫色很有韵味
 
-> 用代码记录生活。
+> 一个在杭州写代码的创造者，用代码记录生活。
 
 ---
 
@@ -38,34 +38,46 @@
 
 ---
 
-### 📊 数据看板
+### 🏆 GitHub 成就
 
 <p align="center">
-  <img height="165" src="https://github-readme-stats.vercel.app/api?username=lxhcool&show_icons=true&theme=radical&hide_border=true&bg_color=0d1117&title_color=A855F7&icon_color=A855F7" alt="GitHub Stats"/>
-  <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=lxhcool&layout=compact&theme=radical&hide_border=true&bg_color=0d1117&title_color=A855F7" alt="Top Languages"/>
+  <a href="https://github.com/ryo-ma/github-profile-trophy">
+    <img src="https://github-profile-trophy.vercel.app/?username=lxhcool&theme=radical&no-bg=true&no-frame=true&column=7&margin-w=15&margin-h=15" alt="GitHub Trophy" />
+  </a>
 </p>
 
-<p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=lxhcool&theme=radical&hide_border=true&background=0d1117&stroke=A855F7&ring=A855F7&fire=A855F7&currStreakLabel=A855F7" alt="GitHub Streak"/>
-</p>
+> 💡 如果上方奖杯不显示，可以换成这个镜像地址：
+> `https://github-profile-trophy-liard-delta.vercel.app/?username=lxhcool&theme=radical&no-bg=true&no-frame=true&column=7&margin-w=15&margin-h=15`
+
+---
+
+### 📊 数据一览
+
+| 指标 | 数值 |
+|------|------|
+| ⭐ 公开仓库 | 7 |
+| 👥 关注者 | 4 |
+| 🎯 关注中 | 3 |
+| 📍 所在地 | 杭州 |
+| 🌐 个人网站 | [lxhcool.cn](https://www.lxhcool.cn) |
 
 ---
 
 ### 🚀 精选项目
 
-| 项目 | 描述 | 技术 |
-|------|------|------|
-| [one-keep](https://github.com/lxhcool/one-keep) | 记账APP | Dart |
-| [one-launch](https://github.com/lxhcool/one-launch) | - | Swift |
-| [agent-team](https://github.com/lxhcool/agent-team) | - | Python |
-| [one-rss](https://github.com/lxhcool/one-rss) | - | TypeScript |
-| [huoke](https://github.com/lxhcool/huoke) | - | Python |
+| 项目 | 描述 | 技术 | 状态 |
+|------|------|------|------|
+| [one-keep](https://github.com/lxhcool/one-keep) | 记账APP | Dart | 🟢 |
+| [one-launch](https://github.com/lxhcool/one-launch) | - | Swift | 🟢 |
+| [agent-team](https://github.com/lxhcool/agent-team) | - | Python | 🟢 |
+| [one-rss](https://github.com/lxhcool/one-rss) | - | TypeScript | 🟢 |
+| [huoke](https://github.com/lxhcool/huoke) | - | Python | 🟢 |
 
 ---
 
 ### 🌴 状态
 
 ```text
-💻 正在写代码
+💻 正在杭州写代码
 🎯 2026 目标：做出更多 cool 的东西
 🎵 妹妹说紫色很有韵味
