@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  你想要创造一切吗？。
+  去创造属于你的世界
 </p>
 
 <p align="center">
