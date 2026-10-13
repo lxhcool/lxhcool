@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="你点进来看，是不是也觉得那个黑色大眼球挺好玩的？" />
+    <!-- Open Graph / 微信 / QQ 社交分享卡片信息 -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="lxhcool" />
+    <meta property="og:description" content="你点进来看，是不是也觉得那个黑色大眼球挺好玩的？" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="lxhcool" />
+    <meta name="twitter:description" content="你点进来看，是不是也觉得那个黑色大眼球挺好玩的？" />
+    <title>lxhcool</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2246%22 fill=%22%23111111%22/><circle cx=%2242%22 cy=%2246%22 r=%226%22 fill=%22%23ffffff%22/><circle cx=%2258%22 cy=%2246%22 r=%226%22 fill=%22%23ffffff%22/></svg>" />
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <main>
+      <!-- 1. 顶部个人标志与名称 (Grok Bot 灵动弹簧转头大眼萌黑球) -->
+      <header class="reveal-item" style="animation-delay: 0ms">
+        <div class="avatar-blob-wrap" role="img" aria-label="Grok 灵动大眼萌跟随头像">
+          <svg id="grok-avatar" viewBox="0 0 229 229" width="58" height="58" aria-hidden="true">
+            <!-- 身体：圆润 Blob 黑色球体 (左边缘精确在 x=0) -->
+            <path id="grok-body" d="M228.541 114.228C228.541 130.133 225.184 145.994 218.738 160.534C212.674 174.217 203.904 186.669 193.065 196.988C155.933 232.34 99.497 238.596 55.5255 212.24C45.097 205.99 35.6851 198.072 27.7451 188.866C19.1926 178.953 12.3686 167.569 7.65781 155.351C2.60712 142.264 0 128.257 0 114.228C0 98.3219 3.35751 82.4611 9.80315 67.9215C15.8672 54.2382 24.6377 41.7862 35.4767 31.4668C72.6081 -3.88483 129.044 -10.1413 173.016 16.2153C183.444 22.4653 192.856 30.3829 200.796 39.5896C209.349 49.5018 216.173 60.8859 220.883 73.1037C225.934 86.1906 228.541 100.198 228.541 114.228Z" fill="currentColor" />
+            <!-- 灵动双眼容器（精致胶囊椭圆眼） -->
+            <g id="grok-face">
+              <!-- 左眼 -->
+              <rect id="grok-eye-l" x="-20" y="-17" width="14" height="34" rx="7" fill="#ffffff" />
+              <!-- 右眼 -->
+              <rect id="grok-eye-r" x="6" y="-17" width="14" height="34" rx="7" fill="#ffffff" />
+            </g>
+          </svg>
+        </div>
+        <h1 id="profile-name">lxhcool</h1>
+        <p id="profile-occupation" class="occupation">交互与前端探索者</p>
+      </header>
+
+      <!-- 2. 关于我 & 联系方式 -->
+      <section class="about-me reveal-item" style="animation-delay: 60ms" aria-label="关于我">
+        <div id="about-paragraphs"></div>
+        <nav id="about-socials" class="about-socials" aria-label="联系方式"></nav>
+      </section>
+
+      <!-- 3. 时间轴经历 -->
+      <section id="timeline-section" class="reveal-item" style="animation-delay: 120ms">
+        <ol id="timeline-list" class="timeline" aria-label="经历与动态"></ol>
+      </section>
+
+      <!-- 4. 作品图片展示区 (支持：带链接跳转 / 仅展示不点击 / 纯单图) -->
+      <section class="studio reveal-item" style="animation-delay: 180ms" aria-labelledby="works-title">
+        <h2 id="works-title">作品</h2>
+        <div id="studio-grid" class="studio-grid"></div>
+      </section>
+
+      <!-- 5. 页脚：署名 + 完整年月日时间 + 深浅色切换 -->
+      <footer class="reveal-item" style="animation-delay: 240ms">
+        <p id="footer-colophon" class="colophon">由 lxhcool 设计与构建</p>
+        <p class="local-conditions">
+          <span id="footer-location">中国 · 厦门</span>
+          <span>·</span>
+          <span><time data-local-time aria-label="当前时间">…</time></span>
+          <span>·</span>
+          <button id="theme-toggle" type="button" class="theme-toggle-icon" aria-label="切换深浅色模式"></button>
+        </p>
+      </footer>
+    </main>
+
+    <!-- 回到顶部按钮（吸附于内容区域 580px 的右下角） -->
+    <button id="back-to-top" type="button" class="back-to-top-btn" aria-label="回到顶部" title="回到顶部">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="m18 15-6-6-6 6" />
+      </svg>
+    </button>
+
+    <!-- 电脑端鼠标悬停时间轴链接时的浮动预览框 -->
+    <div class="project-preview" aria-hidden="true"></div>
+
+    <!-- 极简微信二维码弹窗 -->
+    <div id="wechat-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="微信二维码">
+      <div class="modal-box">
+        <div id="modal-wx-id" style="color: var(--muted)">微信号：lxhcooool</div>
+        <div class="modal-qr">
+          <img id="modal-qr-img" src="./assets/wx.png" alt="微信二维码" />
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="link-btn" data-action="copy-wechat">复制微信号</button>
+          <button id="close-modal" type="button" class="link-btn" style="color: var(--muted)">关闭</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 底部复制提示 Toast -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- 全局数据配置文件（保证秒开，零大文件依赖） -->
+    <script src="./data.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>

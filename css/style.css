@@ -1,0 +1,749 @@
+/* ==========================================================================
+   lxhcool Personal Website — Inspired by https://www.bobby.so/ (Dead Simple Sites)
+   ========================================================================== */
+
+:root,
+[data-theme="light"] {
+  --bg: #ffffff;
+  --text: #171717;
+  --muted: #808080;
+  --timeline-dot: #c8c8c4;
+  --icon-border: rgba(0, 0, 0, 0.06);
+  --card-border: #e8e8e8;
+  --card-bg: #f6f5f1;
+  --hr-color: #eeeeee;
+  --preview-shadow: 0 8px 28px rgb(0 0 0 / 8%);
+  --modal-backdrop: rgb(0 0 0 / 28%);
+}
+
+[data-theme="dark"] {
+  --bg: #0f0f0f;
+  --text: #ededed;
+  --muted: #828282;
+  --timeline-dot: #484848;
+  --icon-border: rgba(255, 255, 255, 0.08);
+  --card-border: #262626;
+  --card-bg: #171716;
+  --hr-color: #242424;
+  --preview-shadow: 0 12px 32px rgb(0 0 0 / 50%);
+  --modal-backdrop: rgb(0 0 0 / 65%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--bg);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+body {
+  margin: 0;
+  padding: 60px 40px;
+  color: var(--text);
+  font: 400 0.875rem/23px "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main {
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+  font: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   Grok Bot 灵动弹簧大眼萌跟随头像 (零大图依赖，纯矢量纯代码秒开)
+   ========================================================================== */
+.avatar-blob-wrap {
+  display: block;
+  position: relative;
+  width: 58px;
+  height: 58px;
+  margin: 0 0 18px 0;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#grok-avatar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  color: var(--grok-body-color, #161513);
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.08));
+  transition: color 240ms cubic-bezier(0.2, 0.8, 0.2, 1), filter 200ms ease;
+}
+
+[data-theme="dark"] #grok-avatar {
+  color: var(--grok-body-color, #ededed);
+  filter: drop-shadow(0 8px 18px rgba(255, 255, 255, 0.06));
+}
+
+#grok-face circle,
+#grok-face rect {
+  fill: var(--grok-eye-color, #ffffff);
+  transition: fill 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* 深色模式默认眼睛反色为暗黑底色 */
+[data-theme="dark"] #grok-face circle,
+[data-theme="dark"] #grok-face rect {
+  fill: var(--grok-eye-color, #161513);
+}
+
+.avatar-blob-wrap:hover #grok-avatar {
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.14));
+}
+
+[data-theme="dark"] .avatar-blob-wrap:hover #grok-avatar {
+  filter: drop-shadow(0 10px 22px rgba(255, 255, 255, 0.12));
+}
+
+.occupation {
+  margin-top: 2px;
+  color: var(--muted);
+}
+
+/* ==========================================================================
+   About Me & Links
+   ========================================================================== */
+.about-me {
+  margin-top: 32px;
+  line-height: 26px;
+}
+
+.about-me > p + p {
+  margin-top: 16px;
+}
+
+.about-socials {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.social-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  color: var(--muted);
+  background: var(--card-bg);
+  border: 1px solid var(--icon-border);
+  text-decoration: none;
+  transition: color 150ms ease, border-color 150ms ease, background-color 150ms ease, transform 180ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.social-icon-btn:hover {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--text) 22%, transparent);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.social-icon-btn svg {
+  display: block;
+}
+
+/* 微信 Hover 浮动二维码（免去点击） */
+.wechat-hover-wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.wechat-popover {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  z-index: 50;
+  width: 154px;
+  padding: 10px 10px 8px;
+  border-radius: 12px;
+  background: var(--bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--preview-shadow);
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 200ms cubic-bezier(0.2, 0.7, 0.2, 1), visibility 180ms;
+}
+
+/* 消除悬停时中间 10px 空隙导致的意外关闭（精准限制在间隙区域） */
+.wechat-popover::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 10px;
+}
+
+.wechat-hover-wrap:hover .wechat-popover {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.wechat-popover-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.wechat-popover-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 8px;
+  line-height: 1;
+}
+
+.wechat-popover-id {
+  font-size: 0.75rem;
+  color: var(--muted);
+  user-select: text;
+}
+
+.wechat-popover-id .wechat-code {
+  color: var(--text);
+  font-family: inherit;
+}
+
+.wechat-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border-radius: 4px;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: color 140ms ease, background-color 140ms ease, border-color 140ms ease;
+}
+
+.wechat-copy-btn:hover {
+  color: var(--text);
+  background: var(--card-bg);
+  border-color: var(--icon-border);
+}
+
+.wechat-copy-btn svg {
+  display: block;
+}
+
+a,
+.link-btn {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, currentColor 20%, transparent);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 150ms ease, color 150ms ease;
+}
+
+a:hover,
+.link-btn:hover {
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+}
+
+a:focus-visible,
+.link-btn:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 1px;
+}
+
+/* ==========================================================================
+   Timeline (Left vertical line, time above text)
+   ========================================================================== */
+.timeline {
+  position: relative;
+  margin: 48px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 贯穿时间轴最左侧的细线 */
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  bottom: 8px;
+  left: 3px;
+  width: 1px;
+  background: var(--card-border);
+  pointer-events: none;
+}
+
+.timeline li {
+  position: relative;
+  padding-left: 24px;
+  padding-bottom: 22px;
+}
+
+.timeline li:last-child {
+  padding-bottom: 0;
+}
+
+/* 左侧轴线上的实心扁平圆点 */
+.timeline-dot {
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--timeline-dot);
+  border: none;
+  transition: transform 160ms cubic-bezier(0.2, 0.7, 0.2, 1),
+              background-color 150ms ease;
+}
+
+.timeline li:hover .timeline-dot {
+  background: var(--muted);
+  transform: scale(1.3);
+}
+
+/* 时间在文案上面 */
+.timeline-time {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 4px;
+}
+
+/* 文案在时间下面 */
+.timeline-content {
+  margin: 0;
+  line-height: 23px;
+  color: var(--text);
+}
+
+.project-preview {
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  width: min(300px, calc(100vw - 32px));
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  box-shadow: var(--preview-shadow);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(6px) scale(0.98);
+  transition: opacity 180ms ease, transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1), visibility 180ms;
+}
+
+.project-preview.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.project-preview img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   Studio (2-Column Project Showcase Grid)
+   ========================================================================== */
+.studio {
+  margin-top: 48px;
+}
+
+.studio h2 {
+  margin: 0 0 16px;
+  font: inherit;
+}
+
+.studio-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.studio-card {
+  display: block;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
+}
+
+.studio-card.is-clickable {
+  cursor: pointer;
+}
+
+.studio-card.is-static {
+  cursor: default;
+}
+
+.studio-card:hover {
+  text-decoration: none;
+}
+
+.studio-preview {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  border-radius: 14px;
+  background: var(--card-bg);
+  transition: border-color 180ms ease, transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.studio-card.is-clickable:hover .studio-preview {
+  border-color: color-mix(in srgb, var(--text) 24%, transparent);
+}
+
+.studio-poster {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  transition: transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.studio-card.is-clickable:hover .studio-poster {
+  transform: scale(1.03);
+}
+
+.studio-card.is-placeholder {
+  cursor: default;
+}
+
+.studio-placeholder-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+}
+
+.placeholder-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--muted);
+  user-select: none;
+}
+
+.placeholder-icon {
+  opacity: 0.7;
+  color: var(--muted);
+  transform-origin: center center;
+  transition: transform 320ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 200ms ease, color 200ms ease;
+}
+
+.studio-card.is-placeholder:hover .placeholder-icon {
+  opacity: 1;
+  color: var(--text);
+  transform: translateY(-2px) scale(1.16) rotate(12deg);
+}
+
+.placeholder-tip {
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+.studio-card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.studio-card-title {
+  display: block;
+  text-decoration: none;
+}
+
+.studio-card-meta {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+@supports (corner-shape: superellipse(1.6)) {
+  .project-preview,
+  .studio-preview {
+    corner-shape: superellipse(1.6);
+  }
+}
+
+footer {
+  margin-top: 56px;
+  color: var(--muted);
+  font-size: 0.75rem;
+  line-height: 20px;
+}
+
+.local-conditions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  margin-top: 6px;
+  font-variant-numeric: tabular-nums;
+}
+
+.theme-toggle-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  color: var(--muted);
+  vertical-align: middle;
+  transition: color 150ms ease, transform 180ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.theme-toggle-icon:hover {
+  color: var(--text);
+  transform: scale(1.15);
+}
+
+.theme-toggle-icon:active {
+  transform: scale(0.92);
+}
+
+.theme-toggle-icon svg {
+  display: block;
+}
+
+/* ==========================================================================
+   Staggered Reveal Animation (Like bobby.so content-reveal)
+   ========================================================================== */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(5px);
+  animation: softReveal 420ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+@keyframes softReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   Minimalist WeChat QR Modal & Toast
+   ========================================================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--modal-backdrop);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 180ms ease, visibility 180ms;
+}
+
+.modal-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-box {
+  width: min(280px, 100%);
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid var(--card-border);
+  background: var(--bg);
+  box-shadow: var(--preview-shadow);
+  text-align: center;
+  transform: translateY(6px) scale(0.98);
+  transition: transform 200ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.modal-backdrop.is-open .modal-box {
+  transform: translateY(0) scale(1);
+}
+
+.modal-qr {
+  width: 180px;
+  height: 180px;
+  margin: 12px auto;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  background: #ffffff;
+}
+
+.modal-qr img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+/* ==========================================================================
+   Back to Top Button (内容区域右侧底部)
+   ========================================================================== */
+.back-to-top-btn {
+  position: fixed;
+  bottom: 32px;
+  /* 精准吸附在 580px 内容宽度右边缘外侧，保证在大屏不贴屏幕边缘，在小屏不溢出 */
+  left: min(calc(50% + 290px + 20px), calc(100vw - 52px));
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  color: var(--muted);
+  background: var(--card-bg);
+  border: 1px solid var(--icon-border);
+  box-shadow: var(--preview-shadow);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  pointer-events: none;
+  cursor: pointer;
+  transition: opacity 200ms ease, transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1),
+              visibility 200ms, color 150ms ease, border-color 150ms ease, background-color 150ms ease;
+}
+
+.back-to-top-btn.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.back-to-top-btn:hover {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--text) 24%, transparent);
+  transform: translateY(-2px);
+}
+
+.back-to-top-btn:active {
+  transform: translateY(0) scale(0.95);
+}
+
+.toast {
+  position: fixed;
+  top: 24px;
+  left: 50%;
+  transform: translate(-50%, -10px);
+  z-index: 120;
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--card-border);
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: var(--preview-shadow);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 200ms cubic-bezier(0.2, 0.7, 0.2, 1), visibility 180ms;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+/* ==========================================================================
+   Responsive Breakpoints (Exact bobby.so media queries)
+   ========================================================================== */
+@media (max-width: 1199px) {
+  body {
+    font-size: 0.9375rem;
+    line-height: 24px;
+  }
+}
+
+@media (max-width: 639px) {
+  body {
+    padding: 44px 24px;
+  }
+
+  .studio-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+}
+
+@media (max-width: 359px) {
+  body {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-preview,
+  .reveal-item {
+    transition: none;
+    transform: none;
+    animation: none;
+    opacity: 1;
+  }
+}
