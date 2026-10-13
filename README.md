@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <a href="https://www.lxhcool.cn">
+  <a href="https://www.lxhcoool.cn">
     <img src="https://img.shields.io/badge/lxhcool.cn-E85D04?style=flat-square&logo=google-chrome&logoColor=white" />
   </a>
 </p>
