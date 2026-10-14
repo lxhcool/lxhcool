@@ -40,7 +40,12 @@ window.DATA = {
   "timeline": [
     {
       "year": "2026",
-      "text": "想给平时拍下的光影找个安静的居所，个人摄影展示站正在开发中"
+      "text": "给平时拍下的光影造了个安静去处，就叫「照片」，把快门按下的瞬间统统洗了出来",
+      "link": {
+        "text": "照片",
+        "url": "https://photos.lxhcoool.cn",
+        "preview": "./assets/photos.png"
+      }
     },
     {
       "year": "2026",
@@ -78,6 +83,12 @@ window.DATA = {
   "worksTitle": "作品",
   "works": [
     {
+      "image": "./assets/photos.png",
+      "title": "照片",
+      "tag": "个人摄影集",
+      "url": "https://photos.lxhcoool.cn"
+    },
+    {
       "image": "./assets/station.png",
       "title": "Station 浏览器起始页",
       "tag": "浏览器扩展",
@@ -85,9 +96,9 @@ window.DATA = {
     },
     {
       "isPlaceholder": true,
-      "title": "个人摄影展示站",
-      "tag": "开发中",
-      "placeholderText": "更多作品孵化中…"
+      "title": "更多想法孵化中…",
+      "tag": "即将到来",
+      "placeholderText": "下一个好玩的点子正在赶来…"
     }
   ]
 };
